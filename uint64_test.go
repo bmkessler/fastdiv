@@ -41,6 +41,21 @@ func TestUint64Mod(t *testing.T) {
 	}
 }
 
+func TestUint64DivMod(t *testing.T) {
+	checkUint64ModDiv := func(x, y uint64) bool {
+		if y == 0 {
+			return true
+		}
+		d := NewUint64(y)
+		q, r := d.DivMod(x)
+		return (x/y) == q && (x%y) == r
+	}
+
+	if err := quick.Check(checkUint64ModDiv, nil); err != nil {
+		t.Error(err)
+	}
+}
+
 func TestUint64Divisible(t *testing.T) {
 	checkUint64Divisible := func(x, y uint64) bool {
 		if x < y {
