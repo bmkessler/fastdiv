@@ -48,7 +48,7 @@ func (d Int16) Div(n int16) int16 {
 func (d Int16) Mod(n int16) int16 {
 	fraction := d.m * uint32(n)
 	mod, _ := bits.Mul32(fraction, d.absd)
-	return int16(mod) - (int16(d.absd)-1)&(n>>31)
+	return int16(mod) - (int16(d.absd)-1)&(n>>15)
 }
 
 // DivMod calculates n / d and n % d using the pre-computed inverse.
